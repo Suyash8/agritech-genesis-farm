@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Droplets, ThermometerSun, Leaf, DollarSign, Activity, ArrowRight } from "lucide-react";
