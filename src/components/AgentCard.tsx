@@ -1,5 +1,5 @@
 
-import { Farm, LineChart, Cloud, Sprout } from "lucide-react";
+import { Tractor, LineChart, Cloud, Leaf } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AgentCardProps {
@@ -14,13 +14,13 @@ const AgentCard = ({ type, title, description, isActive = false, onClick }: Agen
   const getAgentIcon = () => {
     switch (type) {
       case "farmer_advisor":
-        return <Farm className="h-6 w-6 text-farm-green" />;
+        return <Tractor className="h-6 w-6 text-farm-green" />;
       case "market_researcher":
         return <LineChart className="h-6 w-6 text-tech-blue" />;
       case "weather_analyst":
         return <Cloud className="h-6 w-6 text-sky-400" />;
       case "agri_expert":
-        return <Sprout className="h-6 w-6 text-yellow-500" />;
+        return <Leaf className="h-6 w-6 text-yellow-500" />;
     }
   };
 

@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Droplets, ThermometerSun, Leaf, Seedling, DollarSign, Activity, ArrowRight } from "lucide-react";
+import { Droplets, ThermometerSun, Leaf, Plant, DollarSign, Activity, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { FarmerInputData } from "@/types";
 import { v4 as uuidv4 } from "uuid";
@@ -218,7 +217,7 @@ const FarmerInput = () => {
           
           <div className="space-y-6">
             <h3 className="text-lg font-medium flex items-center gap-2">
-              <Seedling className="h-5 w-5 text-farm-green" />
+              <Plant className="h-5 w-5 text-farm-green" />
               <span>Crop Preferences</span>
             </h3>
             

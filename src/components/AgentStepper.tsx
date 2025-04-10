@@ -1,5 +1,5 @@
 
-import { Check, Farm, LineChart, Cloud, Sprout } from "lucide-react";
+import { Check, Tractor, LineChart, Cloud, Leaf } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AgentStepperProps {
@@ -10,7 +10,7 @@ const agents = [
   {
     id: "farmer_advisor",
     title: "Farmer Advisor",
-    icon: Farm,
+    icon: Tractor,
     color: "text-farm-green",
   },
   {
@@ -28,7 +28,7 @@ const agents = [
   {
     id: "agri_expert",
     title: "Agri Expert",
-    icon: Sprout,
+    icon: Leaf,
     color: "text-yellow-500",
   },
 ];

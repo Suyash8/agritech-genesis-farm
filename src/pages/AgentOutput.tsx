@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Farm, LineChart, Cloud, Sprout, Check, AlertTriangle, ArrowUpRight } from "lucide-react";
+import { Tractor, LineChart, Cloud, Leaf, Check, AlertTriangle, ArrowUpRight } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
@@ -36,7 +35,6 @@ const AgentOutputPage = () => {
   const agentTypes = ["farmer_advisor", "market_researcher", "weather_analyst", "agri_expert"];
   
   useEffect(() => {
-    // Get session id from query params or localStorage
     const params = new URLSearchParams(location.search);
     const paramSessionId = params.get("session");
     const storedSessionId = localStorage.getItem("currentSessionId");
@@ -45,13 +43,11 @@ const AgentOutputPage = () => {
     setSessionId(effectiveSessionId);
     
     if (effectiveSessionId) {
-      // Try to load farm input data
       const storedFarmData = localStorage.getItem(`farmInput_${effectiveSessionId}`);
       
       if (storedFarmData) {
         setFarmInputData(JSON.parse(storedFarmData));
       } else {
-        // No farm data found, redirect to input form
         toast({
           title: "No farm data found",
           description: "Please fill out the farm input form first",
@@ -60,7 +56,6 @@ const AgentOutputPage = () => {
         navigate("/farmer-input");
       }
     } else {
-      // No session id found, redirect to input form
       toast({
         title: "No active session",
         description: "Please start a new advisory session",
@@ -83,20 +78,15 @@ const AgentOutputPage = () => {
     const agentType = agentTypes[currentAgentIndex] as any;
     
     try {
-      // Update progress for UI feedback
       setProgress((currentAgentIndex / agentTypes.length) * 100);
       
-      // Simulate API call to agent
       const result = await simulateAgentProcess(farmInputData, agentType, agentOutputs);
       
-      // Add result to outputs
       setAgentOutputs(prev => [...prev, result]);
       
-      // Move to next agent
       setCurrentAgentIndex(prevIndex => prevIndex + 1);
       setProgress(((currentAgentIndex + 1) / agentTypes.length) * 100);
       
-      // If this was the last agent, save the complete session
       if (currentAgentIndex === agentTypes.length - 1 && sessionId) {
         saveAdvisorySession({
           id: sessionId,
@@ -204,7 +194,7 @@ const AgentOutputPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="bg-secondary/30 rounded-lg p-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <Farm className="h-5 w-5 text-farm-green" />
+                          <Tractor className="h-5 w-5 text-farm-green" />
                           <h3 className="font-medium">Farm Analysis</h3>
                         </div>
                         <p className="text-sm text-muted-foreground mb-2">
@@ -250,7 +240,7 @@ const AgentOutputPage = () => {
                 ) : (
                   <div className="text-center py-12">
                     <div className="animate-pulse-slow">
-                      <Sprout className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                      <Leaf className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                       <p className="text-muted-foreground">
                         {currentAgentIndex === 0 ? "Starting analysis..." : "Processing data..."}
                       </p>
@@ -278,7 +268,7 @@ const AgentOutputPage = () => {
                 <div className="glass-card rounded-xl p-6">
                   <div className="flex items-center gap-2 mb-6">
                     <div className="p-2 bg-farm-green/20 rounded-lg">
-                      <Farm className="h-6 w-6 text-farm-green" />
+                      <Tractor className="h-6 w-6 text-farm-green" />
                     </div>
                     <h2 className="text-xl font-medium">Farmer Advisor Output</h2>
                   </div>
@@ -301,7 +291,7 @@ const AgentOutputPage = () => {
                         <h3 className="text-lg font-medium mb-3">Crop Suggestion</h3>
                         <div className="bg-secondary/30 rounded-lg p-4">
                           <div className="flex items-center gap-2 mb-2">
-                            <Sprout className="h-5 w-5 text-farm-green" />
+                            <Leaf className="h-5 w-5 text-farm-green" />
                             <span className="font-medium">{getFarmerOutput()?.output.suggested_crop}</span>
                           </div>
                           <p className="text-sm text-muted-foreground">
@@ -483,7 +473,7 @@ const AgentOutputPage = () => {
                           <div className="grid grid-cols-2 gap-2">
                             {getWeatherOutput()?.output.best_suited_crops.map((crop, i) => (
                               <div key={i} className="flex items-center gap-2 p-2 bg-secondary/50 rounded-lg">
-                                <Sprout className="h-4 w-4 text-farm-green" />
+                                <Leaf className="h-4 w-4 text-farm-green" />
                                 <span className="font-medium">{crop}</span>
                               </div>
                             ))}
@@ -513,7 +503,7 @@ const AgentOutputPage = () => {
                 <div className="glass-card rounded-xl p-6">
                   <div className="flex items-center gap-2 mb-6">
                     <div className="p-2 bg-yellow-500/20 rounded-lg">
-                      <Sprout className="h-6 w-6 text-yellow-500" />
+                      <Leaf className="h-6 w-6 text-yellow-500" />
                     </div>
                     <h2 className="text-xl font-medium">Agricultural Expert Output</h2>
                   </div>
@@ -523,7 +513,7 @@ const AgentOutputPage = () => {
                       <h3 className="text-xl font-medium mb-2">Final Recommendation</h3>
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 rounded-full bg-farm-green flex items-center justify-center">
-                          <Sprout className="h-6 w-6 text-white" />
+                          <Leaf className="h-6 w-6 text-white" />
                         </div>
                         <span className="text-2xl font-bold text-gradient">
                           {getAgriExpertOutput()?.output.final_crop_recommendation}
